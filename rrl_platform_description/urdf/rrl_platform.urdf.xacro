@@ -1,0 +1,260 @@
+<?xml version="1.0" ?>
+<robot name="rrl_platform" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find rrl_platform_description)/urdf/common_properties.xacro"/>
+  <xacro:include filename="$(find rrl_platform_description)/urdf/rrl_platform.gazebo.xacro"/>
+
+  <link name="base_footprint"/>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link" />
+    <origin xyz="0 0 0.0122" rpy="0 0 0"/>
+  </joint>
+
+  <link name="base_link">
+    <visual>
+      <origin xyz="-0.035 0 0.0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rrl_platform_description/meshes/bases/rrl_platform_mesh.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="light_black"/>
+    </visual>
+
+    <collision>
+      <origin xyz="-0.035 0 0.02901" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.220 0.220 0.05802"/>
+      </geometry>
+    </collision>
+    
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+	  <mass value="0.881e+00"/>
+	  <inertia ixx="3.0e-03" ixy="0" ixz="0"
+			   iyy="3.0e-03" iyz="0"
+			   izz="6.0e-03" />
+    </inertial>
+  </link>
+
+  <joint name="wheel_left_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_left_link"/>
+    <origin xyz="0.015 -0.09975 0.0188" rpy="-1.57 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="wheel_left_link">
+    <visual>
+      <origin xyz="0 0 -0.0085" rpy="0 1.57 0"/>
+      <geometry>
+        <mesh filename="package://rrl_platform_description/meshes/wheels/wheel_mesh.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="dark"/>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0.0045" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.026" radius="0.0325"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <origin xyz="0 0 0" />
+	  <mass value="3.3e-02" />
+      <inertia ixx="1e-05" ixy="0.0" ixz="0.0"
+               iyy="1e-05" iyz="0.0"
+               izz="1e-05" />
+	  </inertial>
+  </link>
+
+  <joint name="wheel_right_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_right_link"/>
+    <origin xyz="0.015 0.09975 0.0188" rpy="-1.57 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="wheel_right_link">
+	<visual>
+	  <origin xyz="0 0 0.0085" rpy="0 -1.57 0"/>
+	  <geometry>
+		<mesh filename="package://rrl_platform_description/meshes/wheels/wheel_mesh.stl" scale="0.001 0.001 0.001"/>
+	  </geometry>
+	  <material name="dark"/>
+	</visual>
+
+	<collision>
+	  <origin xyz="0 0 -0.0045" rpy="0 0 0"/>
+	  <geometry>
+		<cylinder length="0.026" radius="0.0325"/>
+	  </geometry>
+	</collision>
+
+	<inertial>
+	  <origin xyz="0 0 0" />
+	  <mass value="3.3e-02" />
+      <inertia ixx="1e-05" ixy="0.0" ixz="0.0"
+               iyy="1e-05" iyz="0.0"
+               izz="1e-05" />
+	  </inertial>
+  </link>
+
+  <joint name="caster_back_right_joint" type="fixed">
+	<parent link="base_link"/>
+	<child link="caster_back_right_link"/>
+	<origin xyz="-0.133 0.053 -0.0075" rpy="-1.57 0 0"/>
+  </joint>
+
+  <link name="caster_back_right_link">
+	<visual>
+	  <origin xyz="0 0 0" rpy="0 0 0"/>
+	  <geometry>
+		<mesh filename="package://rrl_platform_description/meshes/wheels/caster_ball_mesh.stl" scale="0.001 0.001 0.001"/>
+	  </geometry>
+	  <material name="white"/>
+	</visual>
+	<collision>
+	  <origin xyz="0.000575 0 0" rpy="0 0 0"/>
+	  <geometry>
+		<box size="0.01385 0.013 0.013"/>
+	  </geometry>
+	</collision>
+
+	<inertial>
+	  <origin xyz="0 0 0" />
+	  <mass value="8.37e-03" />
+      <inertia ixx="1e-03" ixy="0.0" ixz="0.0"
+               iyy="1e-03" iyz="0.0"
+               izz="1e-03" />
+	  </inertial>
+  </link>
+
+  <joint name="caster_back_left_joint" type="fixed">
+	<parent link="base_link"/>
+	<child link="caster_back_left_link"/>
+	<origin xyz="-0.133 -0.053 -0.0075" rpy="-1.57 0 0"/>
+  </joint>
+
+  <link name="caster_back_left_link">
+	<visual>
+	  <origin xyz="0 0 0" rpy="0 0 0"/>
+	  <geometry>
+		<mesh filename="package://rrl_platform_description/meshes/wheels/caster_ball_mesh.stl" scale="0.001 0.001 0.001"/>
+	  </geometry>
+	  <material name="white"/>
+	</visual>
+	<collision>
+	  <origin xyz="0.000575 0 0" rpy="0 0 0"/>
+	  <geometry>
+		<box size="0.01385 0.013 0.013"/>
+	  </geometry>
+	</collision>
+
+	<inertial>
+	  <origin xyz="0 0 0" />
+	  <mass value="8.37e-03" />
+      <inertia ixx="1e-03" ixy="0.0" ixz="0.0"
+               iyy="1e-03" iyz="0.0"
+               izz="1e-03" />
+	  </inertial>
+  </link>
+
+  <joint name="imu_joint" type="fixed">
+	<parent link="base_link"/>
+	<child link="imu_link"/>
+	<origin xyz="0.0 0 0.020" rpy="0 0 0"/>
+  </joint>
+
+  <link name="imu_link"/>
+
+  <!-- <joint name="scan_joint" type="fixed"> -->
+  <!--   <parent link="base_link"/> -->
+  <!--   <child link="base_scan"/> -->
+  <!--   <origin xyz="-0.064 0 0.122" rpy="0 0 0"/> -->
+  <!-- </joint> -->
+  <!--  -->
+  <!-- <link name="base_scan"> -->
+  <!--   <visual> -->
+  <!--     <origin xyz="0 0 0" rpy="0 0 0"/> -->
+  <!--     <geometry> -->
+  <!--       <mesh filename="package://turtlebot3_description/meshes/sensors/lds.stl" scale="0.001 0.001 0.001"/> -->
+  <!--     </geometry> -->
+  <!--     <material name="dark"/> -->
+  <!--   </visual> -->
+  <!--  -->
+  <!--   <collision> -->
+  <!--     <origin xyz="0.015 0 -0.0065" rpy="0 0 0"/> -->
+  <!--     <geometry> -->
+  <!--       <cylinder length="0.0315" radius="0.055"/> -->
+  <!--     </geometry> -->
+  <!--   </collision> -->
+  <!--  -->
+  <!--   <inertial> -->
+  <!--     <mass value="0.114" /> -->
+  <!--     <origin xyz="0 0 0" /> -->
+  <!--     <inertia ixx="0.001" ixy="0.0" ixz="0.0" -->
+  <!--              iyy="0.001" iyz="0.0" -->
+  <!--              izz="0.001" /> -->
+  <!--   </inertial> -->
+  <!-- </link> -->
+  <!--  -->
+  <!-- <joint name="camera_joint" type="fixed"> -->
+  <!--   <origin xyz="0.064 -0.065 0.094" rpy="0 0 0"/> -->
+  <!--   <parent link="base_link"/> -->
+  <!--   <child link="camera_link"/> -->
+  <!-- </joint> -->
+  <!--  -->
+  <!-- <link name="camera_link"> -->
+  <!--   <visual> -->
+  <!--    <origin xyz="0 0 0" rpy="1.57 0 1.57"/> -->
+  <!--     <geometry> -->
+  <!--      <mesh filename="package://turtlebot3_description/meshes/sensors/r200.dae" /> -->
+  <!--     </geometry> -->
+  <!--   </visual> -->
+  <!--   <collision> -->
+  <!--     <origin xyz="0.003 0.065 0.007" rpy="0 0 0"/> -->
+  <!--     <geometry> -->
+  <!--       <box size="0.012 0.132 0.020"/> -->
+  <!--     </geometry> -->
+  <!--   </collision> -->
+  <!-- </link> -->
+
+    <!-- This inertial field needs doesn't contain reliable data!! -->
+<!--   <inertial>
+      <mass value="0.564" />
+      <origin xyz="0 0 0" />
+      <inertia ixx="0.003881243" ixy="0.0" ixz="0.0"
+               iyy="0.000498940" iyz="0.0"
+               izz="0.003879257" />
+    </inertial>-->
+
+  <!-- <joint name="camera_rgb_joint" type="fixed"> -->
+  <!--   <origin xyz="${r200_cam_rgb_px} ${r200_cam_rgb_py} ${r200_cam_rgb_pz}" rpy="0 0 0"/> -->
+  <!--   <parent link="camera_link"/> -->
+  <!--   <child link="camera_rgb_frame"/> -->
+  <!-- </joint> -->
+  <!-- <link name="camera_rgb_frame"/> -->
+  <!--  -->
+  <!-- <joint name="camera_rgb_optical_joint" type="fixed"> -->
+  <!--   <origin xyz="0 0 0" rpy="-1.57 0 -1.57"/> -->
+  <!--   <parent link="camera_rgb_frame"/> -->
+  <!--   <child link="camera_rgb_optical_frame"/> -->
+  <!-- </joint> -->
+  <!-- <link name="camera_rgb_optical_frame"/> -->
+  <!--  -->
+  <!-- <joint name="camera_depth_joint" type="fixed"> -->
+  <!--   <origin xyz="${r200_cam_rgb_px} ${r200_cam_rgb_py + r200_cam_depth_offset} ${r200_cam_rgb_pz}" rpy="0 0 0"/> -->
+  <!--   <parent link="camera_link"/> -->
+  <!--   <child link="camera_depth_frame"/> -->
+  <!-- </joint> -->
+  <!-- <link name="camera_depth_frame"/> -->
+  <!--  -->
+  <!-- <joint name="camera_depth_optical_joint" type="fixed"> -->
+  <!--   <origin xyz="0 0 0" rpy="-1.57 0 -1.57"/> -->
+  <!--   <parent link="camera_depth_frame"/> -->
+  <!--   <child link="camera_depth_optical_frame"/> -->
+  <!-- </joint> -->
+  <!-- <link name="camera_depth_optical_frame"/> -->
+
+</robot>
